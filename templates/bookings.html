@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center mt-5">
+  {% if message %}
+  <div class="alert alert-info">{{ message }}</div>
+  {% else %}
+  <h4>No message provided.</h4>
+  {% endif %}
+  <a href="{{ url_for('my_bookings') }}" class="btn btn-dark mt-3">⬅ Back to My Bookings</a>
+</div>
+{% endblock %}

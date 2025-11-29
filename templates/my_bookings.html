@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4 text-center">📘 My Bookings</h2>
+
+{% if bookings %}
+<table class="table table-striped table-bordered align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>Booking ID</th>
+      <th>Type</th>
+      <th>Item ID</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Amount (₹)</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for b in bookings %}
+    <tr>
+      <td>{{ b.booking_id }}</td>
+      <td>{{ b.booking_type }}</td>
+      <td>{{ b.item_id }}</td>
+      <td>{{ b.start_date or '-' }}</td>
+      <td>{{ b.end_date or '-' }}</td>
+      <td>{{ b.amount or 0 }}</td>
+      <td>
+        {% if b.status == 'cancelled' %}
+        <span class="badge bg-danger">{{ b.status }}</span>
+        {% else %}
+        <span class="badge bg-success">{{ b.status }}</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if b.status != 'cancelled' %}
+        <a href="{{ url_for('ticket', booking_id=b.booking_id) }}" class="btn btn-sm btn-primary">🎫 Show Ticket</a>
+        <form method="POST" action="{{ url_for('cancel', booking_id=b.booking_id) }}" style="display:inline;">
+          <button class="btn btn-sm btn-outline-danger">❌ Cancel</button>
+        </form>
+        {% else %}
+        <span class="text-muted">Cancelled</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-info text-center">You have no bookings yet.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.booking-container {
+  background: linear-gradient(135deg, #f8fcff, #ffffff);
+  border-radius: 18px;
+  padding: 30px;
+  max-width: 650px;
+  margin: 40px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h3 {
+  color: #0277bd;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #0288d1, #26c6da);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 25px;
+  padding: 10px 25px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-gradient:hover {
+  transform: scale(1.05);
+}
+</style>
+
+<div class="booking-container">
+  <h3>🧳 Book Your Trip to {{ dest.city }}</h3>
+  <p class="text-center text-muted mb-4">Confirm your travel dates and complete your booking.</p>
+
+  <form method="POST" action="{{ url_for('book_trip', dest_id=dest.id) }}">
+    <div class="mb-3">
+      <label>Destination</label>
+      <input type="text" class="form-control" name="destination" value="{{ dest.city }}, {{ dest.country }}" readonly>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label>Start Date</label>
+        <input type="date" class="form-control" name="start_date" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>End Date</label>
+        <input type="date" class="form-control" name="end_date" required>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>Number of Travellers</label>
+      <input type="number" class="form-control" name="travellers" value="1" min="1">
+    </div>
+    <div class="mb-3">
+      <label>Estimated Budget (₹)</label>
+      <input type="number" class="form-control" name="amount" value="20000" required>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn-gradient">Confirm Booking ✅</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

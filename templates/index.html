@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- ========== HERO SECTION ========== -->
+<section class="text-center mt-5">
+  <h1 class="fw-bold text-primary mb-3">🌍 Explore the World with AI Trip Advisor</h1>
+  <p class="text-muted mb-4">
+    Discover dream destinations and get personalized travel itineraries powered by AI — from local wonders to global adventures.
+  </p>
+</section>
+
+<!-- ========== DESTINATIONS GRID ========== -->
+<div class="container">
+  <div class="destination-grid">
+
+    {% for dest in destinations %}
+    <div class="destination-card">
+      {% if dest.city.lower() == 'goa' %}
+      <img src="https://plus.unsplash.com/premium_photo-1697729701846-e34563b06d47?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z29hfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Goa">
+      {% elif dest.city.lower() == 'manali' %}
+      <img src="https://images.unsplash.com/photo-1712388430474-ace0c16051e2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFuYWxpfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Manali">
+      {% elif dest.city.lower() == 'varanasi' %}
+      <img src="https://images.unsplash.com/photo-1627894483216-2138af692e32?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmFyYW5hc2l8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Varanasi">
+      {% elif dest.city.lower() == 'paris' %}
+      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60" class="destination-image" alt="Paris">
+      {% elif dest.city.lower() == 'tokyo' %}
+      <img src="https://plus.unsplash.com/premium_photo-1661914240950-b0124f20a5c1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dG9reW98ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Tokyo">
+      {% elif dest.city.lower() == 'new york' %}
+      <img src="https://plus.unsplash.com/premium_photo-1714051660720-888e8454a021?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIweW9ya3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="New York">
+      {% elif dest.city.lower() == 'dubai' %}
+      <img src="https://plus.unsplash.com/premium_photo-1697729914552-368899dc4757?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZHViYWl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Dubai">
+      {% elif dest.city.lower() == 'singapore' %}
+      <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1052" class="destination-image" alt="Singapore">
+      {% elif dest.city.lower() == 'bali' %}
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60" class="destination-image" alt="Bali">
+      {% elif dest.city.lower() == 'london' %}
+      <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=60" class="destination-image" alt="London">
+      {% elif dest.city.lower() == 'sydney' %}
+      <img src="https://images.unsplash.com/photo-1528072164453-f4e8ef0d475a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3lkbmV5fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Sydney">
+      {% elif dest.city.lower() == 'kathmandu' %}
+      <img src="https://images.unsplash.com/photo-1623492701902-47dc207df5dc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8a2F0aG1hbmR1fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Kathmandu">
+      {% elif dest.city.lower() == 'jaipur' %}
+      <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8amFpcHVyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" class="destination-image" alt="Jaipur">
+      {% else %}
+      <img src="https://images.unsplash.com/photo-1526779259212-939e64788e3d?auto=format&fit=crop&w=800&q=60" class="destination-image" alt="Travel">
+      {% endif %}
+
+      <!-- Destination Info -->
+      <div class="destination-content">
+        <h4>{{ dest.city }}, {{ dest.country }}</h4>
+        <p>{{ dest.description[:100] }}...</p>
+        <a href="{{ url_for('destination', dest_id=dest.id) }}" class="destination-btn">
+          ✈️ Plan Trip
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer class="mt-5">
+  <p>© {{ 2025 }} AI Trip Advisor | Designed by <strong>Debargha Pal</strong> ✨</p>
+</footer>
+
+{% endblock %}
+
